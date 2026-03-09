@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Task Manager</h1>
+      <p>Agrega y organiza tus tareas</p>
+    </header>
+
+    <div class="card">
+      <div class="add-row">
+        <input type="text" id="newTask" placeholder="¿Qué hay que hacer?" autocomplete="off" />
+        <button type="button" id="btnAdd" class="btn btn-primary">Agregar</button>
+      </div>
+
+      <p id="error" class="error" style="display: none;"></p>
+
+      <ul id="taskList" class="task-list"></ul>
+
+      <div id="emptyMsg" class="empty-state" style="display: none;">
+        <div class="icon">📋</div>
+        <p>No hay tareas.<br>Agrega una arriba para empezar.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
