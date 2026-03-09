@@ -1,4 +1,8 @@
-const API = 'http://localhost:3000/tasks';
+// Use localhost in development; in production (e.g. Netlify) use PRODUCTION_API_URL or same origin
+const isLocal = typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+const API_BASE = isLocal ? 'http://localhost:3000' : (window.PRODUCTION_API_URL || window.location.origin);
+const API = API_BASE + '/tasks';
 const REQUEST_TIMEOUT_MS = 10000;
 
 const listEl = document.getElementById('taskList');
