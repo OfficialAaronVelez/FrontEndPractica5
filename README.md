@@ -1,3 +1,6 @@
+LIVE SITE: https://tasksapipractica.netlify.app/
+
+
 # Task Manager
 
 A simple full-stack Task Manager: a REST API (Node.js + Express) and a web frontend to create, list, and delete tasks. Tasks are stored in memory on the server (no database). The UI is vanilla HTML, CSS, and JavaScript with clear error messages for network and server failures.
