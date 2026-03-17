@@ -176,3 +176,74 @@ body {
   margin-top: 0.5rem;
   padding: 0.5rem 0;
 }
+
+/* Auth (login/register) */
+.auth-card .form-row {
+  margin-bottom: 1rem;
+}
+.auth-card .form-row label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+.auth-card .form-row input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+.auth-card .form-row input:focus {
+  border-color: var(--accent);
+}
+.auth-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+.auth-tabs button {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.auth-tabs button.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+.auth-card .btn {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.btn-logout {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.btn-logout:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+.hidden { display: none !important; }

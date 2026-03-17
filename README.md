@@ -3,26 +3,21 @@ LIVE SITE: https://tasksapipractica.netlify.app/
 
 # Task Manager
 
-A simple full-stack Task Manager: a REST API (Node.js + Express) and a web frontend to create, list, and delete tasks. Tasks are stored in memory on the server (no database). The UI is vanilla HTML, CSS, and JavaScript with clear error messages for network and server failures.
+Full-stack Task Manager with **JWT authentication** (JSON Server Auth): REST API and web frontend to register, log in, and manage tasks. Tasks and users are stored in `db.json` (file-based). The UI is vanilla HTML, CSS, and JavaScript.
 
 ---
 
 ## What This App Does
 
-- Backend (API)  
-  Serves a REST API at `http://localhost:3000`. You can:
-  - GET all tasks
-  - POST a new task (title and optional `completed` flag)
-  - DELETE a task by id  
+- **Backend (API)** — JSON Server + JSON Server Auth at `http://localhost:3000`:
+  - **POST /register** or **POST /login** — sign up or sign in with `email` and `password`; response includes JWT `accessToken`.
+  - **GET /tasks**, **POST /tasks**, **DELETE /tasks/:id** — require `Authorization: Bearer <token>`.
 
-  Data is kept in memory, so it resets when you restart the server.
-
-- Frontend  
-  A single-page app in the browser where you can:
-  - See all tasks when the page loads (calls the API)
-  - Add a new task with an input and an “Agregar” button (Enter also works)
-  - Delete a task with an “Eliminar” button per task  
-  The app shows clear error messages for things like no internet, timeout, or server errors.
+- **Frontend** — Single-page app with:
+  - Login / Register form; on success, token is stored (see [SECURITY.md](SECURITY.md) for localStorage vs cookies).
+  - Task list, add task, delete task; all requests send the JWT.
+  - Logout clears the token.
+  - Clear error messages (network, timeout, 401, etc.).
 
 Prerequisites
 
@@ -47,10 +42,12 @@ How to Run (After Cloning)
    npm start
 
    You should see something like:
-   API ENDPOINT: http://localhost:3000
-     GET  /tasks     - list tasks
-     POST /tasks     - create task
-     DELETE /tasks/:id - delete task
+   Task Manager API: http://localhost:3000
+     POST /register  - sign up
+     POST /login     - sign in
+     GET  /tasks     - list tasks (Bearer token required)
+     POST /tasks     - create task (Bearer token required)
+     DELETE /tasks/:id - delete task (Bearer token required)
 
 4. Open the app in the browser
    - Go to: http://localhost:3000  
@@ -61,30 +58,31 @@ How to Run (After Cloning)
 
 ---
 
-Project Structure:
+## Project Structure
+
+```
 FrontEndPractica5/
-├── server.js              # Express app: CORS, JSON, static files, mounts /tasks
-├── routes/
-│   └── tasks.js           # Routes: GET /, POST /, DELETE /:id → controller
-├── controllers/
-│   └── tasksController.js # In-memory task list; getAllTasks, createTask, deleteTask
-├── public/                # Served at http://localhost:3000
-│   ├── index.html         # Single page: form + task list + empty state
-│   ├── styles.css         # Layout and dark-theme styles
-│   └── app.js             # API calls, DOM updates, error messages
+├── server.js              # JSON Server + json-server-auth, static public/
+├── db.json                # Users and tasks (JSON Server database)
+├── public/
+│   ├── index.html         # Auth form + task list
+│   ├── styles.css         # Layout and styles
+│   └── app.js             # Login/register, token storage, authenticated API calls
+├── SECURITY.md            # ISIP05/ISIP03: token storage (localStorage vs cookies), XSS, httpOnly
 ├── package.json
 └── README.md
+```
 
-- API lives in `server.js` → `routes/tasks.js` → `controllers/tasksController.js`.
-- Frontend is static: `public/index.html` loads `styles.css` and `app.js`. The script talks to `http://localhost:3000/tasks`.
+- Backend: **json-server** + **json-server-auth** (JWT). Tasks require auth (permission 660).
+- Frontend: stores JWT in localStorage and sends `Authorization: Bearer <token>` on every `/tasks` request. See [SECURITY.md](SECURITY.md) for the choice of storage and httpOnly cookies.
 
 ---
 
 
 ## Tech Stack
 
-- Backend: Node.js, Express, CORS. No database (in-memory array).
-- Frontend: HTML5, CSS3, vanilla JavaScript. No frameworks. Uses `fetch` with a 10-second timeout and user-facing error messages for network/timeout/server errors.
+- **Backend:** Node.js, Express, [json-server](https://github.com/typicode/json-server), [json-server-auth](https://github.com/jeremyben/json-server-auth) (JWT, bcrypt). Data in `db.json`.
+- **Frontend:** HTML5, CSS3, vanilla JavaScript. Token in localStorage; requests use `Authorization: Bearer <token>`. See [SECURITY.md](SECURITY.md) for ISIP05 (localStorage vs cookies) and ISIP03 (XSS, httpOnly).
 
 ---
 

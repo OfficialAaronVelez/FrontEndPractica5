@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "email": "aaronvelez@test.com",
+      "password": "$2a$10$UplaAWlot/DmN/vNijeOK.SJG/EclIiDy5JzGZhOdIitND8JYpvvy",
+      "id": 1
+    },
+    {
+      "email": "aaron@gmai.com",
+      "password": "$2a$10$7vJdjzulEOcvNzI2i41L/eAtKpEvOc03YozhLCMe1PbghfWyvHsw6",
+      "id": 2
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Estudiar Web APIs",
+      "completed": false,
+      "userId": 1
+    },
+    {
+      "title": "User1",
+      "completed": false,
+      "userId": "1",
+      "id": 2
+    },
+    {
+      "title": "user2",
+      "completed": false,
+      "userId": "2",
+      "id": 3
+    }
+  ]
+}
