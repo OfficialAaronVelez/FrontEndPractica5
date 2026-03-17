@@ -1,4 +1,3 @@
-// --- API config ---
 const isLocal = typeof window !== 'undefined' &&
   (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
 const API_BASE = isLocal ? 'http://localhost:3000' : (window.PRODUCTION_API_URL || window.location.origin);
@@ -7,18 +6,12 @@ const LOGIN_URL = API_BASE + '/login';
 const REGISTER_URL = API_BASE + '/register';
 const REQUEST_TIMEOUT_MS = 10000;
 
-// --- Token storage (ISIP05 / ISIP03)
-// We use localStorage for simplicity. Alternatives:
-// - Cookies: can be httpOnly so JS cannot read them → avoids XSS stealing the token.
-//   Downside: need backend to set the cookie and same-site/CSRF handling.
-// - localStorage: easy for SPA, but if the site has an XSS bug, script can read the token.
-// For production, prefer httpOnly cookies set by the API and same-site policy.
+
 const TOKEN_KEY = 'task_manager_access_token';
 function getToken() { return localStorage.getItem(TOKEN_KEY); }
 function setToken(token) { localStorage.setItem(TOKEN_KEY, token); }
 function clearToken() { localStorage.removeItem(TOKEN_KEY); }
 
-// Get user id from JWT payload (sub claim) so we can tag new tasks with userId
 function getUserIdFromToken() {
   const token = getToken();
   if (!token) return null;
@@ -28,7 +21,6 @@ function getUserIdFromToken() {
   } catch (_) { return null; }
 }
 
-// --- DOM refs ---
 const authSection = document.getElementById('authSection');
 const tasksSection = document.getElementById('tasksSection');
 const authForm = document.getElementById('authForm');

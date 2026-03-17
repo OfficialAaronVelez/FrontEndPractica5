@@ -1,4 +1,3 @@
-// In Memory Storage
 let tasks = [
   { id: 1, title: 'Estudiar Web APIs', completed: false }
 ];
